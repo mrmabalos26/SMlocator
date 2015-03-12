@@ -1,0 +1,59 @@
+﻿<Window x:Class="MP_Variant1.Maps"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
+        Title="Maps" Height="451" Width="788" >
+    <Window.Resources>
+        <sys:String x:Key="Aqhh6jxoBGH8ef7orHsYwUsPFIDvDK_L8Z86oIWeVajBOfZUjH4_uYf5CfNmB_LH">
+            Aqhh6jxoBGH8ef7orHsYwUsPFIDvDK_L8Z86oIWeVajBOfZUjH4_uYf5CfNmB_LH
+        </sys:String>
+    </Window.Resources>
+    <Grid>
+        <dxm:MapControl Name="mapControl1" CenterPoint="14.5833,121" ZoomLevel="13"  >
+            <dxm:ImageTilesLayer>
+                <dxm:ImageTilesLayer.DataProvider>
+                    <dxm:BingMapDataProvider Kind ="Road" BingKey="{Binding Source={StaticResource Aqhh6jxoBGH8ef7orHsYwUsPFIDvDK_L8Z86oIWeVajBOfZUjH4_uYf5CfNmB_LH}}" />
+                </dxm:ImageTilesLayer.DataProvider>
+            </dxm:ImageTilesLayer>
+            <!--region #Geocode-->
+            <dxm:InformationLayer Name="geocodeInformationLayer" >
+                <dxm:InformationLayer.DataProvider>
+                    <dxm:BingGeocodeDataProvider BingKey="{Binding Source={StaticResource Aqhh6jxoBGH8ef7orHsYwUsPFIDvDK_L8Z86oIWeVajBOfZUjH4_uYf5CfNmB_LH}}" 
+                                                 MaxVisibleResultCount="1" 
+                                                 LayerItemsGenerating="GeocodeLayerItemsGenerating" />
+                </dxm:InformationLayer.DataProvider>
+            </dxm:InformationLayer>
+            <!--endregion #Geocode-->
+            <!--region #Routing-->
+            <dxm:InformationLayer Name="routeInformationLayer" EnableHighlighting="False">
+                <dxm:InformationLayer.DataProvider>
+                    <dxm:BingRouteDataProvider x:Name="routeDataProvider" 
+                                               BingKey="{Binding Source={StaticResource Aqhh6jxoBGH8ef7orHsYwUsPFIDvDK_L8Z86oIWeVajBOfZUjH4_uYf5CfNmB_LH}}" 
+                                               LayerItemsGenerating="RouteLayerItemsGenerating" />
+                </dxm:InformationLayer.DataProvider>
+            </dxm:InformationLayer>
+            <!--endregion #Routing-->
+            <dxm:VectorLayer x:Name="myMap" ItemsSource="{Binding Path=Helpers}" Margin="0,-10,0,10"/>
+        </dxm:MapControl>
+        <Button Content="Locate Available SM" HorizontalAlignment="Left" Margin="40,544,0,-144" VerticalAlignment="Top" Width="148" Click="Locate_Click"/>
+        <Button Content="Clear" HorizontalAlignment="Left" Margin="40,569,0,-169" VerticalAlignment="Top" Width="148" Click="ClearClick"/>
+        <Button Content="Sign Out" HorizontalAlignment="Left" Margin="1249,569,-544,-169" VerticalAlignment="Top" Width="75" Click="Button_Click_3"/>
+        <Button Content="Help" HorizontalAlignment="Left" Margin="1225,509,-544,-130" VerticalAlignment="Top" Width="99" Height="41" Click="Help_Click"/>
+        <ComboBox HorizontalAlignment="Left" Margin="40,311,0,0" VerticalAlignment="Top" Width="184">
+            <ComboBoxItem Content="Mapua Institute of Technology" HorizontalAlignment="Left" Width="184" Selected="MapuaSelect" Margin="0,0,-2,0"/>
+            <ComboBoxItem Content="Santolan LRT Station" HorizontalAlignment="Left" Width="182" Selected="SantolanSelect"/>
+            <ComboBoxItem Content="Quezon City Memorial Circle" HorizontalAlignment="Left" Width="182" Selected="QuezonSelect"/>
+            <ComboBoxItem Content="Pinaglabanan Shrine" HorizontalAlignment="Left" Width="182" Selected="PinaglabananSelect"/>
+            <ComboBoxItem Content="Madison Square Garden Hotel" HorizontalAlignment="Left" Width="182" Selected="MadisonSelect"/>
+            <ComboBoxItem Content="Robinsons Novaliches" HorizontalAlignment="Left" Width="182" Selected="RobinsonsSelect"/>
+            <ComboBoxItem Content="Rizal Park" HorizontalAlignment="Left" Width="182" Selected="RizalSelect"/>
+            <ComboBoxItem Content="Saint Monica Church" HorizontalAlignment="Left" Width="182" Selected="MonicaSelect"/>
+        </ComboBox>
+        <Label Content="Choose your starting location" HorizontalAlignment="Center" Margin="-245,276,841,0" VerticalAlignment="Top" Width="184" Foreground="White"/>
+        <Button Content="Compute" HorizontalAlignment="Left" Height="20" Margin="40,519,0,-119" VerticalAlignment="Top" Width="148" Click="Button_Click"/>
+
+
+
+    </Grid>
+</Window>
